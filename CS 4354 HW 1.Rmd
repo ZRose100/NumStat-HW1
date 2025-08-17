@@ -1,0 +1,106 @@
+---
+title: "STAT 4354 HW 1"
+output: pdf_document
+date: "2025-01-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(MASS)
+```
+
+## Question 1
+
+A view of the data
+
+```{r}
+set.seed(1234)
+x = rt(1000, 5)
+summary(x)
+```
+
+Histogram Creation
+
+```{r}
+truehist(x)
+```
+
+\newpage
+
+## Question 2
+
+Add t density curve
+```{r}
+truehist(x)
+curve(dt(x, df=5), add=TRUE)
+```
+
+\newpage
+
+## Question 3
+
+Add estimated density curve
+```{r}
+truehist(x)
+curve(dt(x, df=5), add=TRUE)
+lines(density(x), col=2)
+```
+
+\newpage
+
+## Question 4
+
+Part A: Create (x - b) / a function
+
+```{r}
+f <- function(x, a, b) {
+  (x - a) / b
+}
+```
+
+Part B: Use function to get [0,1]
+
+```{r}
+# create initial random sample
+set.seed(1234)
+x <- rnorm(100, 3, 2)
+
+# transform
+y <- f(x, min(x), max(x) - min(x))
+
+summary(x)
+summary(y)
+```
+
+\newpage
+
+## Question 5
+
+Studentize sample
+```{r}
+z <- f(x, mean(x), sd(x))
+
+# Check studentization
+mean(z) # almost exactly 0
+sd(z)
+
+# Visualize and describe z
+summary(z)
+truehist(z)
+```
+
+\newpage
+
+## Question 6
+Transform x
+```{r}
+new_x <- f(x, median(x), IQR(x))
+
+# compare mean
+mean(new_x)
+mean(z)
+
+# compare sd
+sd(new_x)
+sd(z)
+```
