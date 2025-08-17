@@ -1,0 +1,1 @@
+A homework assignment for Numerical and Statistical Computing involving implementing basic statistical processes in R, including histogram creation, studentization of a sample, and creating a density curve.
